@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Selamat Idul Fitri 1446 H</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> <!-- Tambahkan library SweetAlert2 -->
+    <style>
+        /* Tambahkan gaya khusus untuk swal agar berwarna hijau */
+        .swal2-popup {
+            background-color: #28a745 !important;
+            /* Warna hijau */
+            color: white !important;
+            /* Warna teks putih agar kontras */
+        }
+
+        .swal2-title,
+        .swal2-content {
+            color: white !important;
+            /* Warna teks putih */
+        }
+
+        .swal2-confirm {
+            background-color: #218838 !important;
+            /* Warna tombol hijau lebih gelap */
+            border-color: #1e7e34 !important;
+        }
+
+        @keyframes glitterBlink {
+
+            0%,
+            100% {
+                opacity: 1;
+                filter: drop-shadow(0 0 5px #ffd700) drop-shadow(0 0 10px #ffd700) drop-shadow(0 0 15px #ffffff);
+                transform: scale(1);
+            }
+
+            50% {
+                opacity: 0.6;
+                filter: drop-shadow(0 0 20px #ffd700) drop-shadow(0 0 40px #ffff00) drop-shadow(0 0 60px #ffffff);
+                transform: scale(1.05);
+            }
+        }
+
+        .glitter-container {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 9999;
+            pointer-events: none;
+        }
+
+        .glitter-img {
+            max-width: 80vw;
+            max-height: 80vh;
+            animation: glitterBlink 0.8s infinite alternate;
+        }
+    </style>
+</head>
+
+<body>
+
+    <section id="particles-js">
+        <div class="text">
+            <script>
+                document.addEventListener("DOMContentLoaded", function () {
+                    const swals = Swal.mixin({
+                        allowOutsideClick: false,
+                        customClass: {
+                            popup: 'swal2-popup'
+                        }
+                    });
+
+                    async function mulai() {
+                        var { value: nama } = await swals.fire({
+                            title: 'Bagaimana perasaan Anda di hari nan Fitri ini?',
+                            input: 'text',
+                            confirmButtonText: 'Kirim perasaan',
+                            showCancelButton: false,
+                        });
+
+                        if (nama && nama.length < 111) {
+                            window.nama = nama;
+
+                            // Tampilkan pesan satu per satu
+                            await swals.fire('Apapun yang Anda rasakan, kiranya tidak mengurangi sedikitpun sukacita di hari nan Fitri ini');
+                            await swals.fire('Semoga keberkahan melimpah pada Anda dan keluarga di Hari Raya Idul Fitri ini!');
+                            await swals.fire('Selamat menikmati kebersamaan dengan keluarga dan handai taulan');
+                            await swals.fire('Baik di kampung halaman maupun di perantauan');
+                            await swals.fire(`Selamat Hari Raya Idul Fitri 1447 H!`);
+                            await swals.fire('Minal Aidin Wal Faizin');
+                            await swals.fire('Mohon maaf lahir dan batin');
+                            await swals.fire('Teriring salam dan doa dari saya, Pray Putra Hasianro Nadeak');
+                            // Memutar musik setelah swal terakhir
+                            let audio = document.getElementById('bg-audio');
+                            audio.play().catch(error => {
+                                console.log("Autoplay blocked: ", error);
+                            });
+
+                            // Tanya harapan
+                            var { value: harapan } = await swals.fire({
+                                title: "Apa harapan Anda di hari nan Fitri ini?",
+                                input: 'text',
+                                confirmButtonText: 'Kirim Segenap Harapan!',
+                                showCancelButton: false,
+                            });
+
+                            if (harapan && harapan.length < 111) {
+                                await swals.fire(`Semoga ${harapan} terwujud segera ya. Aamiin`);
+                                let container = document.createElement('div');
+                                container.className = 'glitter-container';
+                                let img = document.createElement('img');
+                                img.src = 'happy-eid-al--fitr-1447-h.png';
+                                img.className = 'glitter-img';
+                                container.appendChild(img);
+                                document.body.appendChild(container);
+
+                                document.getElementById("hasiljawab").innerHTML = `Jawaban dari&nbsp;${nama}: <b>${harapan}</b>`;
+                                await swals.fire(`Selamat Hari Raya Idul Fitri 1446 H!`);
+                                await swals.fire('Minal Aidin Wal Faizin');
+                                await swals.fire('Mohon maaf lahir dan batin');
+                            } else {
+                                await swals.fire('Ups!', 'Tidak boleh kosong / lebih dari 110 karakter, ya!');
+                                mulai();
+                            }
+
+                        } else {
+                            await swals.fire('Ups!', 'Nama tidak boleh kosong atau lebih dari 110 karakter, ya!');
+                            mulai();
+                        }
+                    }
+
+                    mulai();
+                });
+            </script>
+        </div>
+        <div class="masjid"></div>
+    </section>
+
+    <audio id="bg-audio" src="audio.mp3" loop></audio>
+
+    <script src="particles.js"></script>
+    <script src="app.js"></script>
+
+</body>
+
+</html>
